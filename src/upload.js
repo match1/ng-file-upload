@@ -173,6 +173,9 @@ ngFileUpload.service('Upload', ['$http', '$q', '$timeout', function ($http, $q, 
         if (angular.isArray(config.file)) {
           var isFileFormNameString = angular.isString(fileFormName);
           for (var i = 0; i < config.file.length; i++) {
+            console.log('MW: %o\t%o\t%o', isFileFormNameString ? fileFormName : fileFormName[i], config.file[i],
+              (config.fileName && config.fileName[i]) || config.file[i].name);
+              //test;
             formData.append(isFileFormNameString ? fileFormName : fileFormName[i], config.file[i],
               (config.fileName && config.fileName[i]) || config.file[i].name);
           }
@@ -180,7 +183,8 @@ ngFileUpload.service('Upload', ['$http', '$q', '$timeout', function ($http, $q, 
           formData.append(fileFormName, config.file, config.fileName || config.file.name);
         }
       }
-      return formData;
+        console.info('formData=', formData);
+        return formData;
     });
 
     return sendHttp(config);
